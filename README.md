@@ -8,7 +8,7 @@ pip install -r requirements.txtでライブラリをインストール。<br>
 ## 実行
 python GetData.pyで実行。<br>
 実行するとフォルダ（Data）が作成され、<br>
-フォルダ（Data）の直下に年数ごとの競馬データがCSV形式で格納される。<br><br>
+フォルダ（Data）の直下に年数ごとの競馬データがCSV形式で格納される。<br>
 
 また、取得できなかったデータリストもCSV形式で格納される。<br>
 このファイルのbreakリストはサイトが存在しないレースID、<br>
