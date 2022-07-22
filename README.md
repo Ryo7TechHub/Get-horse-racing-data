@@ -14,7 +14,7 @@ python GetData.pyで実行。<br>
 このファイルのbreakリストはサイトが存在しないレースID、<br>
 ngリストはデータを取得することができなかったレースIDを示している。<br>
 <br>
-レースIDとは：<https://db.sp.netkeiba.com/race/レースID>のデータを取得する際に使用するID。<br>
+*レースIDとは：<https://db.sp.netkeiba.com/race/レースID>のデータを取得する際に使用するID。<br>
 （例）レースID：202001010101→<https://db.sp.netkeiba.com/race/202001010101>のデータ示す。<br>
 
 ## データ詳細
