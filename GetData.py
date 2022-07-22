@@ -152,36 +152,27 @@ if __name__ == "__main__":
     with tqdm(range_year) as pbar:
         for year in pbar:
             pbar.set_description(f'[{year}年　({range_year[0]}年→{range_year[-1]}年)]')
-            breakList = []
-            ngList = []
-            race_df = pd.DataFrame()
+            breakList = []  # WEBサイトがないレースIDを格納するリスト
+            ngList = []  # データをうまく取得できなかったレースIDを格納するリスト
+            race_df = pd.DataFrame()  # 取得したデータ
             for place in range_place:
                 for number in range_number:
                     for day in range_day:
                         for race in range_race:
-                            pbar.set_postfix(OrderedDict(place=place, number=number, day=day, race=race))
-                            race_table, race_page, race_ID = GetWebPageTable(year, place, number, day, race)
-                            if (race_table == []) | (race_table == None):  # race_tableが上手く取得できていない場合、その後の処理はスキップ
-                                breakList.append(race_ID)
-                                break
-                            race_data = CommonData2List(race_page, race_ID, place, number, day, race)
-                            if race_data == []:  # race_dataが上手く取得できていない場合、その後の処理はスキップ
+                            try:
+                                pbar.set_postfix(OrderedDict(place=place, number=number, day=day, race=race))
+                                race_table, race_page, race_ID = GetWebPageTable(year, place, number, day, race)
+                                if (race_table == []) | (race_table == None):  # race_tableが上手く取得できていない場合、その後の処理はスキップ
+                                    breakList.append(race_ID)
+                                    break
+                                race_data = CommonData2List(race_page, race_ID, place, number, day, race)
+                                if race_data == []:  # race_dataが上手く取得できていない場合、その後の処理はスキップ
+                                    ngList.append(race_ID)
+                                    break
+                                race_df, getFlag = WebData2Pandas(race_df, race_table, race_data)
+                                if not getFlag:  # race_dfが上手く取得できていない場合、その後の処理はスキップ
+                                    ngList.append(race_ID)
+                                    break
+                            except:
                                 ngList.append(race_ID)
-                                break
-                            race_df, getFlag = WebData2Pandas(race_df, race_table, race_data)
-                            if not getFlag:  # race_dfが上手く取得できていない場合、その後の処理はスキップ
-                                ngList.append(race_ID)
-                                break
-
-            race_df.columns = ['レースID', '年', '月', '日', '曜日', '場所', '回数',
-                               '日数', 'レース数', 'レース名', '天気', '馬場状態',
-                               'レースの条件', '芝・ダート', '距離', '右・左回り', '馬数',
-                               '着順', '枠番', '馬番', '馬名', '性別', '年齢', '斤量', '騎手',
-                               'タイム', '着差', 'タイム指数', '通過', '上り', '単勝', '人気',
-                               '馬体重', '体重増減', '備考', '調教師', '馬主', '賞金']
-
-            race_df.to_csv('Data/{}_{}.csv'.format(fileName, year),
-                           encoding='utf_8_sig')  # 年ごとにデータをcsvにして保存
-            ng_df = pd.DataFrame([ngList, breakList], index=['ng', 'break'])
-            ng_df.to_csv('Data/{}_{}_NG.csv'.format(fileName, year),
-                         encoding='utf_8_sig')  # 年ごとにデータをcsvにして保存
+                                continue
