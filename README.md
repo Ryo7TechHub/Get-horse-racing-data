@@ -6,7 +6,7 @@ pip install -r requirements.txtでライブラリをインストール。<br>
 足りないライブラリがあった際は、各自でインストールお願いします。
 
 ## 実行
-python GetDadta.pyで実行。<br>
+python GetData.pyで実行。<br>
 実行するとフォルダ（Data）が作成され、<br>
 フォルダ（Data）の直下に年数ごとの競馬データがCSV形式で格納される。
 
