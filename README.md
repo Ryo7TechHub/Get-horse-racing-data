@@ -8,15 +8,14 @@ pip install -r requirements.txtでライブラリをインストール。<br>
 ## 実行
 python GetData.pyで実行。<br>
 実行するとフォルダ（Data）が作成され、<br>
-フォルダ（Data）の直下に年数ごとの競馬データがCSV形式で格納される。<br>
+フォルダ（Data）の直下に年数ごとの競馬データがCSV形式で格納される。<br><br>
+
 また、取得できなかったデータリストもCSV形式で格納される。<br>
 このファイルのbreakリストはサイトが存在しないレースID、<br>
 ngリストはデータを取得することができなかったレースIDを示している。<br>
 <br>
-レースIDとは：<br>
-https://db.sp.netkeiba.com/race/レースIDのデータを示すもの。<br>
-（例）レースID：202001010101<br>
-https://db.sp.netkeiba.com/race/202001010101のデータ示す。<br>
+レースIDとは：<https://db.sp.netkeiba.com/race/レースID>のデータを取得する際に使用するID。<br>
+（例）レースID：202001010101→<https://db.sp.netkeiba.com/race/202001010101>のデータ示す。<br>
 
 ## データ詳細
 作成したプログラムでは２０１０年～２０２２年の中央競馬場のデータを取得する。<br>
