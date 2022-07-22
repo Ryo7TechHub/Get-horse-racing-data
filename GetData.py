@@ -1,10 +1,12 @@
 # ライブラリ
-import requests
+import os
 from tqdm import tqdm
 from collections import OrderedDict
 import time
+import requests
 from bs4 import BeautifulSoup
 import pandas as pd
+
 
 
 def GetWebPageTable(year, place, number, day, race):
@@ -146,6 +148,7 @@ if __name__ == "__main__":
     range_number = list(range(1, 12))  # 回数の設定
     range_day = list(range(1, 12))  # 日数の設定
     range_race = list(range(1, 13))  # レース数の設定
+    os.makedirs('Data', exist_ok=True)
     with tqdm(range_year) as pbar:
         for year in pbar:
             pbar.set_description(f'[{year}年　({range_year[0]}年→{range_year[-1]}年)]')
